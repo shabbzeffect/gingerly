@@ -1,0 +1,206 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String   // bcrypt hash
+  name      String
+  role      String   @default("ADMIN") // ADMIN | EDITOR
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sessions Session[]
+  auditLogs AuditLog[] @relation("adminActions")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  token        String   @unique
+  adminId      String
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  admin        Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  entity    String
+  entityId  String
+  meta      Json     @default("{}")
+  createdAt DateTime @default(now())
+  adminId   String?
+  admin     Admin?   @relation("adminActions", fields: [adminId], references: [id], onDelete: SetNull)
+}
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model ConsultationEnquiry {
+  id          String   @id @default(cuid())
+  status      String   @default("PENDING") // PENDING | CONFIRMED | RESCHEDULED | CANCELLED | COMPLETED
+  kind        String   @default("IN_PERSON") // IN_PERSON | VIRTUAL
+  firstName   String
+  lastName    String
+  email       String
+  phone       String?
+  occasion    String   // wedding | ruracio | nyombo | koito | bukhwi | prom | menswear | other
+  eventDate   DateTime?
+  eventTimezone String?
+  garmentType String?
+  budget      String?
+  inspiration Text?
+  message     Text?
+  preferredDates Json   @default("[]") // array of ISO strings
+  timeZone    String   @default("UTC")
+  referenceImageUrl String?
+  referenceImageKey String?
+  consent     Boolean  @default(false)
+  internalNotes Text?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model VirtualFittingSubmission {
+  id          String   @id @default(cuid())
+  status      String   @default("RECEIVED") // RECEIVED | IN_REVIEW | APPROVED | REVISIONS_REQUESTED | COMPLETED
+  enquiryId   String?
+  enquiry     ConsultationEnquiry? @relation(fields: [enquiryId], references: [id], onDelete: SetNull)
+  firstName   String
+  lastName    String
+  email       String
+  measurements Json   @default("{}") // editable schema, owner-defined fields
+  notes       Text?
+  files       Json     @default("[]") // [{url, key, filename, mimeType, signedUrl}]
+  reviewedBy  String?
+  reviewedAt  DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model LookbookProject {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  occasion    String?  // ruracio | nyombo | koito | bukhwi | white-wedding | bridesmaid | prom | menswear | occasion
+  garmentType String?
+  fabric      String?
+  details     String?  // lace, beadwork, etc — owner-verified only
+  description Text?
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  images      LookbookImage[]
+}
+
+model LookbookImage {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     LookbookProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  url         String
+  key         String?
+  alt         String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model CeremonyPage {
+  id          String   @id @default(cuid())
+  key         String   @unique // ruracio | nyombo | koito | bukhwi | white-wedding | ...
+  title       String
+  intro       Text?
+  content     Json     @default("{}") // owner-editable sections
+  slug        String   @unique
+  metaTitle   String?
+  metaDescription String?
+  updatedAt   DateTime @updatedAt
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  title       String
+  description Text?
+  category    String?  // bridal | traditional | menswear | occasion | rental
+  active      Boolean  @default(true)
+  order       Int      @default(0)
+  details     Json     @default("{}")
+  updatedAt   DateTime @updatedAt
+}
+
+model FAQ {
+  id          String   @id @default(cuid())
+  question    String
+  answer      Text?
+  category    String?
+  active      Boolean  @default(true)
+  order       Int      @default(0)
+  unverified  Boolean  @default(false) // flag for owner review
+}
+
+model RentalItem {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  occasion    String?
+  size        String?
+  color       String?
+  priceKes    Int?     // Kenyan shillings — null until verified
+  depositKes  Int?
+  terms       Text?
+  active      Boolean  @default(false) // default off until owner confirms inventory
+  available   Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  images      RentalImage[]
+}
+
+model RentalImage {
+  id          String   @id @default(cuid())
+  rentalId    String
+  rental      RentalItem @relation(fields: [rentalId], references: [id], onDelete: Cascade)
+  url         String
+  alt         String
+  order       Int      @default(0)
+}
+
+model RentalEnquiry {
+  id          String   @id @default(cuid())
+  status      String   @default("PENDING") // PENDING | APPROVED | DECLINED | FULFILLED | RETURNED
+  firstName   String
+  lastName    String
+  email       String
+  phone       String?
+  rentalId    String?
+  rental      RentalItem? @relation(fields: [rentalId], references: [id], onDelete: SetNull)
+  eventDate   DateTime?
+  eventTimezone String?
+  message     Text?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactMessage {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  subject     String
+  message     Text?
+  createdAt   DateTime @default(now())
+}
+
+@@index([status, kind])

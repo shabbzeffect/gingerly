@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2000" viewBox="0 0 1600 2000">
+  <rect width="100%" height="100%" fill="#f3e9db"/>
+  <text x="50%" y="45%" font-family="serif" font-size="64" fill="#b8a38e" text-anchor="middle">Sample imagery</text>
+  <text x="50%" y="52%" font-family="sans-serif" font-size="28" fill="#9d866f" text-anchor="middle">Replace /images/placeholder-hero.jpg</text>
+  <circle cx="800" cy="700" r="260" fill="none" stroke="#d4a93c" stroke-width="3" opacity="0.4"/>
+  <circle cx="800" cy="700" r="200" fill="none" stroke="#b85c38" stroke-width="2" opacity="0.3"/>
+</svg>
