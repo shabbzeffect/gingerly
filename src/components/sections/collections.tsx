@@ -66,7 +66,7 @@ const COLLECTIONS: Collection[] = [
 
 export function CollectionsGrid() {
   return (
-    <section className="py-20 lg:py-28 relative">
+    <section className="py-12 sm:py-20 lg:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16">
           <div className="serif">
@@ -78,7 +78,7 @@ export function CollectionsGrid() {
           </Link>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {COLLECTIONS.map((c, i) => (
             <Link
               key={c.slug}
@@ -92,12 +92,12 @@ export function CollectionsGrid() {
                   src={c.image}
                   alt={c.alt}
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-transparent via-black/10 to-black/30" />
                 <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/60 to-transparent" />
               </div>
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <div className="flex items-center justify-between mb-2">
                   <Badge variant="outline" className="group-hover:border-ginger group-hover:text-ginger transition-colors">{c.badge}</Badge>
                 </div>

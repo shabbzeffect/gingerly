@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export function VirtualFittingsCTA() {
   return (
-    <section className="py-20 lg:py-28 relative overflow-hidden">
+    <section className="py-12 sm:py-20 lg:py-28 relative overflow-hidden">
       <div className="absolute inset-0 bg-espresso/95" />
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none" />
       <div

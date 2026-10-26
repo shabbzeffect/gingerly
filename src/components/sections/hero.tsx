@@ -12,7 +12,7 @@ const diaspora = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden min-h-[70vh] sm:min-h-[85vh] flex items-center justify-center">
+    <section className="relative overflow-hidden min-h-[60vh] sm:min-h-[70vh] lg:min-h-[85vh] flex items-center justify-center">
       <div className="absolute inset-0 z-0">
         <Image
           className="absolute inset-0 w-full h-full object-cover opacity-90"
@@ -36,7 +36,7 @@ export function Hero() {
           <div className="inline-flex items-center gap-2 rounded-full border border-ginger/30 bg-ginger/10 px-3 py-1 text-xs font-semibold text-ginger uppercase tracking-wider mb-6 animate-slide-up" style={{ animationDelay: "0.1s" }}>
             Based in Nairobi • Dressing brides worldwide
           </div>
-          <h1 className="serif text-4xl md:text-6xl lg:text-8xl font-bold text-ivory leading-tight mb-6 animate-slide-up" style={{ animationDelay: "0.2s" }}>
+          <h1 className="serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold text-ivory leading-tight mb-6 animate-slide-up" style={{ animationDelay: "0.2s" }}>
             Where Heritage <br />
             <span className="italic text-ginger">Meets Couture</span>
           </h1>
@@ -80,7 +80,7 @@ export function Hero() {
 
 export function EditorialIntro() {
   return (
-    <section className="py-20 lg:py-28 border-y border-border relative">
+    <section className="py-12 sm:py-20 lg:py-28 border-y border-border relative">
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none" />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -102,7 +102,7 @@ export function EditorialIntro() {
               consultations and fittings from London, Sydney, and beyond.
             </p>
           </div>
-          <div className="relative h-[420px] rounded-2xl border border-border overflow-hidden bg-champagne group">
+          <div className="relative h-[300px] sm:h-[420px] rounded-2xl border border-border overflow-hidden bg-champagne group">
             <Image
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-85"
               src="/images/placeholder-atelier.svg"
