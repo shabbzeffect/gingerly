@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
+import ScrollReveal from "@/components/ui/scroll-reveal";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${cormorant.variable} h-full antialiased`}>
-      <body className="min-h-svh flex flex-col">{children}</body>
+      <body className="min-h-svh flex flex-col">{children}<ScrollReveal /></body>
     </html>
   );
 }
