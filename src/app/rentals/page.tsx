@@ -12,14 +12,21 @@ export const metadata: Metadata = {
 };
 
 export default async function RentalsPage() {
-  const [rentalSetting, rentalItems] = await Promise.all([
-    prisma.setting.findUnique({ where: { key: "rentals_enabled" } }),
-    prisma.rentalItem.findMany({
-      where: { active: true, available: true },
-      include: { images: { orderBy: { order: "asc" } } },
-      orderBy: { order: "asc" },
-    }),
-  ]);
+  let rentalSetting: { value: string | null } | null = null;
+  let rentalItems: any[] = [];
+  try {
+    [rentalSetting, rentalItems] = await Promise.all([
+      prisma.setting.findUnique({ where: { key: "rentals_enabled" } }),
+      prisma.rentalItem.findMany({
+        where: { active: true, available: true },
+        include: { images: { orderBy: { order: "asc" } } },
+        orderBy: { order: "asc" },
+      }),
+    ]);
+  } catch {
+    rentalSetting = null;
+    rentalItems = [];
+  }
 
   const enabled = rentalSetting?.value === "true";
 

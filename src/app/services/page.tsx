@@ -12,10 +12,15 @@ export const metadata: Metadata = {
 };
 
 export default async function ServicesPage() {
-  const services = await prisma.service.findMany({
-    where: { active: true },
-    orderBy: { order: "asc" },
-  });
+  let services: any[] = [];
+  try {
+    services = await prisma.service.findMany({
+      where: { active: true },
+      orderBy: { order: "asc" },
+    });
+  } catch {
+    services = [];
+  }
 
   return (
     <div className="flex flex-col min-h-svh">

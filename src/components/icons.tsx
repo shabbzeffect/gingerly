@@ -30,6 +30,7 @@ export const Clock = (props: IconProps) => svg("<circle cx=\"12\" cy=\"12\" r=\"
 export const ChevronRight = (props: IconProps) => svg("<polyline points=\"9 18 15 12 9 6\"/>", props);
 export const ChevronLeft = (props: IconProps) => svg("<polyline points=\"15 18 9 12 15 6\"/>", props);
 export const ChevronDown = (props: IconProps) => svg("<polyline points=\"6 9 12 15 18 9\"/>", props);
+export const ChevronUp = (props: IconProps) => svg("<polyline points=\"18 6 12 12 6 6\"/>", props);
 export const Calendar = (props: IconProps) => svg("<rect x=\"3\" y1=\"4\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\"/><line x1=\"16\" y1=\"2\" x2=\"16\" y2=\"6\"/><line x1=\"8\" y1=\"2\" x2=\"8\" y2=\"6\"/><line x1=\"3\" y1=\"10\" x2=\"21\" y2=\"10\"/>", props);
 export const Award = (props: IconProps) => svg("<circle cx=\"12\" cy=\"8\" r=\"7\"/><polyline points=\"8.21 13.89 7 23 12 20 17 23 15.79 13.89\"/>", props);
 export const Lock = (props: IconProps) => svg("<rect x=\"3\" y1=\"11\" width=\"18\" height=\"11\" rx=\"2\" ry=\"2\"/><path d=\"M7 11V7a5 5 0 0 1 10 0v4\"/>", props);

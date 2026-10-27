@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
+    "framer-motion": "^14.6.0",
     "next": "15.3.0",
     "nodemailer": "^6.10.1",
     "react": "19.3.0",

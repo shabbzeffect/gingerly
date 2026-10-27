@@ -21,14 +21,21 @@ export default async function LookbookPage({
   const { occasion } = await searchParams;
   const occasionFilter = typeof occasion === "string" ? occasion : undefined;
 
-  const [projects, ceremonies] = await Promise.all([
-    prisma.lookbookProject.findMany({
-      where: occasionFilter ? { occasion: occasionFilter } : undefined,
-      include: { images: { orderBy: { order: "asc" } } },
-      orderBy: [{ featured: "desc" }, { order: "asc" }, { createdAt: "desc" }],
-    }),
-    prisma.ceremonyPage.findMany({ select: { key: true, title: true }, orderBy: { title: "asc" } }),
-  ]);
+  let projects: any[] = [];
+  let ceremonies: any[] = [];
+  try {
+    [projects, ceremonies] = await Promise.all([
+      prisma.lookbookProject.findMany({
+        where: occasionFilter ? { occasion: occasionFilter } : undefined,
+        include: { images: { orderBy: { order: "asc" } } },
+        orderBy: [{ featured: "desc" }, { order: "asc" }, { createdAt: "desc" }],
+      }),
+      prisma.ceremonyPage.findMany({ select: { key: true, title: true }, orderBy: { title: "asc" } }),
+    ]);
+  } catch {
+    projects = [];
+    ceremonies = [];
+  }
 
   const occasions = [
     { key: "all", label: "All Occasions" },

@@ -4,10 +4,15 @@ import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = await prisma.lookbookProject.findUnique({
-    where: { slug },
-    select: { title: true, description: true },
-  });
+  let project: { title: string; description: string | null } | null = null;
+  try {
+    project = await prisma.lookbookProject.findUnique({
+      where: { slug },
+      select: { title: true, description: true },
+    });
+  } catch {
+    project = null;
+  }
   if (!project) return { title: "Lookbook" };
   return {
     title: project.title,
@@ -17,10 +22,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = await prisma.lookbookProject.findUnique({
-    where: { slug },
-    include: { images: { orderBy: { order: "asc" } } },
-  });
+  let project: any = null;
+  try {
+    project = await prisma.lookbookProject.findUnique({
+      where: { slug },
+      include: { images: { orderBy: { order: "asc" } } },
+    });
+  } catch {
+    project = null;
+  }
 
   if (!project) notFound();
 

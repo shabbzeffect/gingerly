@@ -24,8 +24,8 @@ export function Hero() {
       <div className="absolute inset-0 z-0">
         <Image
           className="absolute inset-0 w-full h-full object-cover opacity-90"
-          src="/images/placeholder-hero.svg"
-          alt="Atelier placeholder"
+          src="https://images.unsplash.com/photo-1534053177019-1dda72c35e94?w=1600&q=85"
+          alt="Bridal couture detail"
           fill
           sizes="(max-width: 768px) 100vw, 100vw"
           priority
@@ -111,8 +111,8 @@ export function EditorialIntro() {
           <div className="relative h-[320px] sm:h-[440px] rounded-2xl border border-border overflow-hidden bg-champagne group shadow-elegant">
             <Image
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 opacity-90"
-              src="/images/placeholder-atelier.svg"
-              alt="Atelier workspace placeholder"
+              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=85"
+              alt="Atelier workspace"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
             />
