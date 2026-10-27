@@ -6,11 +6,10 @@ import { Menu, X, Phone, Mail, Instagram, Clock } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 
 const NAV = [
-  { href: "/", label: "Home" },
   { href: "/lookbook", label: "The Work" },
-  { href: "/services", label: "Bespoke Services" },
-  { href: "/book", label: "Book a Consultation" },
-  { href: "/virtual-fittings", label: "Virtual Fittings" },
+  { href: "/services", label: "Services" },
+  { href: "/book", label: "Book" },
+  { href: "/virtual-fittings", label: "Virtual" },
   { href: "/rentals", label: "Rentals" },
   { href: "/about", label: "About" },
   { href: "/journal", label: "Journal" },
@@ -27,19 +26,19 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md transition-colors">
-      <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="serif text-2xl font-bold text-espresso tracking-tighter">
           GINGERLY
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-10 text-sm font-medium text-espresso uppercase [letter-spacing:0.03em]">
+        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-espresso uppercase [letter-spacing:0.02em]">
           {NAV.map((item) => (
-            <Link key={item.href} href={item.href} className="hover:text-ginger transition-colors">
+            <Link key={item.href} href={item.href} className="hover:text-ginger transition-colors whitespace-nowrap">
               {item.label}
             </Link>
           ))}
-          <Link href="/book" className="ml-6 flex items-center gap-2 rounded-full border border-espresso px-5 py-1.5 text-xs font-semibold text-espresso hover:bg-espresso hover:text-ivory transition-all uppercase [letter-spacing:0.05em]">
-            <Phone size={13} /> Book
+          <Link href="/book" className="ml-4 flex items-center gap-2 rounded-full border border-espresso px-4 py-1.5 text-xs font-semibold text-espresso hover:bg-espresso hover:text-ivory transition-all uppercase [letter-spacing:0.04em] whitespace-nowrap">
+            <Phone size={12} /> Book
           </Link>
         </nav>
 
