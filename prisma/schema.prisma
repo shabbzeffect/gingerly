@@ -3,9 +3,11 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
+
 
 model Admin {
   id        String   @id @default(cuid())
@@ -61,16 +63,19 @@ model ConsultationEnquiry {
   eventTimezone String?
   garmentType String?
   budget      String?
-  inspiration Text?
-  message     Text?
+  inspiration String?
+  message     String?
   preferredDates Json   @default("[]") // array of ISO strings
   timeZone    String   @default("UTC")
   referenceImageUrl String?
   referenceImageKey String?
   consent     Boolean  @default(false)
-  internalNotes Text?
+  internalNotes String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  virtualFittings VirtualFittingSubmission[]
+
+  @@index([status, kind])
 }
 
 model VirtualFittingSubmission {
@@ -82,7 +87,7 @@ model VirtualFittingSubmission {
   lastName    String
   email       String
   measurements Json   @default("{}") // editable schema, owner-defined fields
-  notes       Text?
+  notes       String?
   files       Json     @default("[]") // [{url, key, filename, mimeType, signedUrl}]
   reviewedBy  String?
   reviewedAt  DateTime?
@@ -98,7 +103,7 @@ model LookbookProject {
   garmentType String?
   fabric      String?
   details     String?  // lace, beadwork, etc — owner-verified only
-  description Text?
+  description String?
   featured    Boolean  @default(false)
   order       Int      @default(0)
   createdAt   DateTime @default(now())
@@ -121,7 +126,7 @@ model CeremonyPage {
   id          String   @id @default(cuid())
   key         String   @unique // ruracio | nyombo | koito | bukhwi | white-wedding | ...
   title       String
-  intro       Text?
+  intro       String?
   content     Json     @default("{}") // owner-editable sections
   slug        String   @unique
   metaTitle   String?
@@ -133,7 +138,7 @@ model Service {
   id          String   @id @default(cuid())
   key         String   @unique
   title       String
-  description Text?
+  description String?
   category    String?  // bridal | traditional | menswear | occasion | rental
   active      Boolean  @default(true)
   order       Int      @default(0)
@@ -144,7 +149,7 @@ model Service {
 model FAQ {
   id          String   @id @default(cuid())
   question    String
-  answer      Text?
+  answer      String?
   category    String?
   active      Boolean  @default(true)
   order       Int      @default(0)
@@ -160,13 +165,14 @@ model RentalItem {
   color       String?
   priceKes    Int?     // Kenyan shillings — null until verified
   depositKes  Int?
-  terms       Text?
-  active      Boolean  @default(false) // default off until owner confirms inventory
-  available   Boolean  @default(false)
-  order       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  images      RentalImage[]
+  terms       String?
+  active        Boolean  @default(false)
+  available     Boolean  @default(false)
+  order         Int      @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  images        RentalImage[]
+  rentalEnquiries RentalEnquiry[]
 }
 
 model RentalImage {
@@ -189,7 +195,7 @@ model RentalEnquiry {
   rental      RentalItem? @relation(fields: [rentalId], references: [id], onDelete: SetNull)
   eventDate   DateTime?
   eventTimezone String?
-  message     Text?
+  message     String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -199,8 +205,6 @@ model ContactMessage {
   name        String
   email       String
   subject     String
-  message     Text?
+  message     String?
   createdAt   DateTime @default(now())
 }
-
-@@index([status, kind])

@@ -9,21 +9,23 @@ export async function generateStaticParams() {
   return projects.map((p: { slug: string }) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const project = await prisma.lookbookProject.findUnique({
-    where: { slug: params.slug },
-    select: { title: true, metaTitle: true, metaDescription: true },
+    where: { slug },
+    select: { title: true, description: true },
   });
   if (!project) return { title: "Lookbook" };
   return {
-    title: project.metaTitle || project.title,
-    description: project.metaDescription,
+    title: project.title,
+    description: project.description,
   };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const project = await prisma.lookbookProject.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
     include: { images: { orderBy: { order: "asc" } } },
   });
 

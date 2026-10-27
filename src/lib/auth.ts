@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 import crypto from "crypto";
 
 const SALT_ROUNDS = 12;
@@ -66,7 +67,7 @@ export async function destroySession(token: string) {
   await prisma.session.deleteMany({ where: { token } });
 }
 
-export async function logAudit(action: string, entity: string, entityId: string, adminId?: string, meta?: Record<string, unknown>) {
+export async function logAudit(action: string, entity: string, entityId: string, adminId?: string, meta?: Prisma.InputJsonValue) {
   return prisma.auditLog.create({
     data: { action, entity, entityId, adminId, meta: meta ?? {} },
   });

@@ -16,9 +16,10 @@ export const metadata: Metadata = {
 export default async function LookbookPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const occasionFilter = typeof searchParams.occasion === "string" ? searchParams.occasion : undefined;
+  const { occasion } = await searchParams;
+  const occasionFilter = typeof occasion === "string" ? occasion : undefined;
 
   const [projects, ceremonies] = await Promise.all([
     prisma.lookbookProject.findMany({
