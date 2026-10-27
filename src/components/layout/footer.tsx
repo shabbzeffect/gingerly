@@ -127,7 +127,7 @@ export function Footer() {
                   href="https://www.instagram.com/gingerlydesignsandfabrics/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-champagne-light/30 text-champagne-light hover:bg-ginger hover:text-espresso transition-all group"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-champagne/30 text-champagne hover:bg-ginger hover:text-espresso transition-all group"
                 >
                   <Instagram size={16} />
                 </a>
@@ -135,13 +135,13 @@ export function Footer() {
                   href="https://wa.me/254700000000"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-champagne-light/30 text-champagne-light hover:bg-ginger hover:text-espresso transition-all group"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-champagne/30 text-champagne hover:bg-ginger hover:text-espresso transition-all group"
                 >
                   <Phone size={16} />
                 </a>
                 <a
                   href="mailto:enquiries@gingerly.co.ke"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-champagne-light/30 text-champagne-light hover:bg-ginger hover:text-espresso transition-all group"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-champagne/30 text-champagne hover:bg-ginger hover:text-espresso transition-all group"
                 >
                   <Mail size={16} />
                 </a>
