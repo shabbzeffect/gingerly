@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { useEffect, useState } from "react";
@@ -9,8 +8,6 @@ type Collection = {
   slug: string;
   title: string;
   occasion: string;
-  image: string;
-  alt: string;
   badge?: string;
 };
 
@@ -19,48 +16,36 @@ const COLLECTIONS: Collection[] = [
     slug: "white-wedding",
     title: "White Wedding",
     occasion: "Bridal gowns & veils",
-    image: "https://images.unsplash.com/photo-1519237914241-a16bb6bb1dbb?w=600&q=85",
-    alt: "White wedding gown detail",
     badge: "Bridal",
   },
   {
     slug: "ruracio",
     title: "Ruracio",
     occasion: "Kikuyu traditional ceremony",
-    image: "https://images.unsplash.com/photo-1595618963492-a6890504181f?w=600&q=85",
-    alt: "Ruracio attire detail",
     badge: "Traditional",
   },
   {
     slug: "nyombo",
     title: "Nyombo",
     occasion: "Luo traditional ceremony",
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&q=85",
-    alt: "Nyombo attire detail",
     badge: "Traditional",
   },
   {
     slug: "koito",
     title: "Koito",
     occasion: "Kalenjin celebration",
-    image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=85",
-    alt: "Koito attire detail",
     badge: "Traditional",
   },
   {
     slug: "bukhwi",
     title: "Bukhwi",
     occasion: "Luhya tradition",
-    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=85",
-    alt: "Bukhwi attire detail",
     badge: "Traditional",
   },
   {
     slug: "menswear",
     title: "Senator Suits",
     occasion: "Tailored menswear",
-    image: "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=600&q=85",
-    alt: "Senator suit detail",
     badge: "Menswear",
   },
 ];
@@ -95,21 +80,13 @@ export function CollectionsGrid() {
               className="group block"
               style={{ animationDelay: `${i * 0.12}s` }}
             >
-              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-border bg-champagne/40 mb-5 shadow-card transition-all duration-700 group-hover:shadow-gold group-hover:-translate-y-2">
+              <div className="relative overflow-hidden rounded-2xl border border-border bg-champagne/40 mb-5 shadow-card transition-all duration-700 group-hover:shadow-gold group-hover:-translate-y-2 min-h-[320px] flex flex-col items-center justify-center pt-16">
                 <div className="absolute inset-0 bg-gradient-to-t from-transparent via-black/10 to-black/35" />
                 <div className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                   <div className="w-12 h-12 rounded-full bg-ivory/95 flex items-center justify-center text-ginger font-bold text-lg shadow-lg">
                     <span aria-hidden="true">→</span>
                   </div>
                 </div>
-                <Image
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-                  src={c.image}
-                  alt={c.alt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  loading="lazy"
-                />
                 {c.badge && (
                   <span className="absolute top-5 left-5 rounded-full border border-ivory bg-espresso text-ivory px-3 py-1 text-xs font-semibold uppercase tracking-wider shadow-lg">
                     {c.badge}
