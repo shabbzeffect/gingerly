@@ -2,13 +2,6 @@ import { prisma } from "@/lib/prisma";
 import LookbookProjectPage from "./page.client";
 import { notFound } from "next/navigation";
 
-export async function generateStaticParams() {
-  const projects = await prisma.lookbookProject.findMany({
-    select: { slug: true },
-  });
-  return projects.map((p: { slug: string }) => ({ slug: p.slug }));
-}
-
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = await prisma.lookbookProject.findUnique({

@@ -8,6 +8,7 @@ import { CollectionsGrid } from "@/components/sections/collections";
 import { Craftsmanship } from "@/components/sections/craftsmanship";
 import { CommissionProcess } from "@/components/sections/craftsmanship";
 import { VirtualFittingsCTA } from "@/components/sections/virtual-fittings-cta";
+import { Testimonials } from "@/components/sections/testimonials";
 
 export const metadata: Metadata = {
   title: "Gingerly Designs and Fabrics — Bespoke Bridal & Occasion Wear, Nairobi",
@@ -33,6 +34,7 @@ export default function Home() {
         <Craftsmanship />
         <CommissionProcess />
         <VirtualFittingsCTA />
+        <Testimonials />
       </main>
       <Footer />
       <FloatingWhatsApp />

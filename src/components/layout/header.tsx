@@ -26,20 +26,20 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md transition-colors">
       <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="serif text-2xl font-bold text-espresso tracking-tighter">
           GINGERLY
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-espresso">
+        <nav className="hidden lg:flex items-center gap-10 text-sm font-medium text-espresso uppercase [letter-spacing:0.03em]">
           {NAV.map((item) => (
             <Link key={item.href} href={item.href} className="hover:text-ginger transition-colors">
               {item.label}
             </Link>
           ))}
-          <Link href="/book" className="ml-4 flex items-center gap-1.5 rounded-full border border-espresso px-4 py-1.5 text-sm font-semibold text-espresso hover:bg-espresso hover:text-ivory transition-colors">
-            <Phone size={14} /> Book
+          <Link href="/book" className="ml-6 flex items-center gap-2 rounded-full border border-espresso px-5 py-1.5 text-xs font-semibold text-espresso hover:bg-espresso hover:text-ivory transition-all uppercase [letter-spacing:0.05em]">
+            <Phone size={13} /> Book
           </Link>
         </nav>
 
@@ -56,28 +56,28 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-border bg-background px-4 pb-4">
-          <nav className="flex flex-col gap-1 text-sm font-medium text-espresso">
+        <div className="lg:hidden border-t border-border bg-background px-4 pb-6">
+          <nav className="flex flex-col gap-1 text-sm font-medium text-espresso uppercase [letter-spacing:0.03em]">
             {NAV.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="block py-2.5 hover:text-ginger transition-colors"
+                className="block py-3 hover:text-ginger transition-colors"
                 onClick={() => setOpen(false)}
               >
                 {item.label}
               </Link>
             ))}
-            <div className="pt-4 border-t border-border flex items-center gap-2">
+            <div className="pt-6 border-t border-border flex items-center gap-3">
               <Link
                 href="/book"
-                className="flex items-center gap-2 rounded-full border border-espresso px-4 py-2 text-sm font-semibold text-espresso w-full justify-center hover:bg-espresso hover:text-ivory transition-colors"
+                className="flex items-center gap-2 rounded-full border border-espresso px-5 py-2 text-xs font-semibold text-espresso w-full justify-center hover:bg-espresso hover:text-ivory transition-all uppercase [letter-spacing:0.05em]"
                 onClick={() => setOpen(false)}
               >
-                <Phone size={14} /> Book a Consultation
+                <Phone size={13} /> Book a Consultation
               </Link>
             </div>
-            <div className="mt-4 flex flex-wrap gap-3 text-xs text-muted-foreground">
+            <div className="mt-6 flex flex-wrap gap-4 text-xs text-muted-foreground">
               {SOCIAL.map((s) => (
                 <a key={s.label} href={s.href} className="flex items-center gap-1 hover:text-ginger transition-colors">
                   <s.icon size={14} /> {s.label}
@@ -89,6 +89,7 @@ export function Header() {
       )}
     </header>
   );
+
 }
 
 export function FloatingWhatsApp() {
@@ -97,7 +98,7 @@ export function FloatingWhatsApp() {
       href="https://wa.me/254700000000"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-terracotta text-ivory shadow-lg hover:bg-terracotta-dark transition-all transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2"
+      className="fixed bottom-10 right-10 z-50 flex h-13 w-13 items-center justify-center rounded-full bg-terracotta text-ivory shadow-lg hover:bg-terracotta-dark transition-all transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2"
       aria-label="Chat on WhatsApp"
     >
       <Phone size={20} />
